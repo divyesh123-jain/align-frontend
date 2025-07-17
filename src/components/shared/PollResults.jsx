@@ -1,4 +1,4 @@
-function PollResults({ poll }) {
+function PollResults({ poll, userType }) {
   const totalVotes = poll.options.reduce((sum, opt) => sum + opt.votes, 0);
 
   return (
@@ -11,15 +11,17 @@ function PollResults({ poll }) {
           </div>
         </div>
 
-        <div className="flex justify-end mb-12">
-          <button className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-full font-medium hover:from-purple-600 hover:to-purple-700 transition-all">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-              <circle cx="12" cy="12" r="3"/>
-            </svg>
-            <span>View Poll history</span>
-          </button>
-        </div>
+        {userType === 'teacher' && (
+          <div className="flex justify-end mb-12">
+            <button className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-full font-medium hover:from-purple-600 hover:to-purple-700 transition-all">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+              <span>View Poll history</span>
+            </button>
+          </div>
+        )}
 
         <div className="mb-8">
           <h2 className="text-2xl font-bold text-black mb-6">Question</h2>
@@ -73,18 +75,20 @@ function PollResults({ poll }) {
           </div>
         </div>
 
-        <div className="flex justify-center">
-          <button 
-            onClick={() => window.location.reload()}
-            className="px-8 py-3 text-white rounded-full font-medium transition-all"
-            style={{
-              background: 'linear-gradient(135deg, #7765DA 0%, #5767D0 100%)',
-              borderRadius: '50px'
-            }}
-          >
-            + Ask a new question
-          </button>
-        </div>
+        {userType === 'teacher' && (
+          <div className="flex justify-center">
+            <button 
+              onClick={() => window.location.reload()}
+              className="px-8 py-3 text-white rounded-full font-medium transition-all"
+              style={{
+                background: 'linear-gradient(135deg, #7765DA 0%, #5767D0 100%)',
+                borderRadius: '50px'
+              }}
+            >
+              + Ask a new question
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
